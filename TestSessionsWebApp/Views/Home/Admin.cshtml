@@ -1,0 +1,55 @@
+﻿@using TestSessionsWebApp.Models;
+@model IEnumerable<ApplicationUser>
+
+@{
+    ViewBag.Title = "MasterUser's Page";
+}
+
+<h2>MasterUser's Page</h2>
+
+<h3>Users List</h3>
+
+<table class="table" id="BooksListTable" cellspacing="0">
+    <thead>
+        <tr>
+            <th>
+                UserId
+            </th>
+            <th>
+                UserName
+            </th>
+            <th>
+                Options
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var user in Model)
+        {
+            <tr>
+                <td>@user.Id</td>
+                <td>@user.Email</td>
+                <td><button onclick="logOutUser('@user.Id')">Log Out</button></td>
+            </tr>
+        }
+
+    </tbody>
+</table>
+
+
+
+<script>
+    var chat = $.connection.signalRUserHub;
+
+    chat.client.onUpdateUserList = function () {
+        if (window.location.pathname == '/Home/Admin') {
+            window.location.reload();
+        }
+    }
+
+    function logOutUser(userId) {
+        $.connection.hub.start().done(function () {
+            chat.server.logOut(userId);
+        });
+    }
+</script>

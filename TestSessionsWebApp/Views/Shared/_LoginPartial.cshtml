@@ -1,0 +1,58 @@
+﻿@using Microsoft.AspNet.Identity
+@if (Request.IsAuthenticated)
+{
+    using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" }))
+    {
+        @Html.AntiForgeryToken()
+
+        <ul class="nav navbar-nav navbar-right">
+            <li>
+                @Html.ActionLink("Hello " + User.Identity.GetUserName() + "!", "Index", "Manage", routeValues: null, htmlAttributes: new { title = "Manage" })
+            </li>
+            <li><a href="javascript:manualLogOff();">Log off</a></li>
+        </ul>
+    }
+
+    <input id="userId" type="hidden" value="@User.Identity.GetUserId()" />
+
+    <script>
+        function logOffRedirect() {
+            var logOff = location.origin + "/Account/LogOut";
+            window.location.replace(logOff);
+        }
+
+        var chat = $.connection.signalRUserHub;
+
+        chat.client.onLogOut = function (userId) {
+            if ($('#userId').val() == userId) {
+                logOffRedirect();
+            }
+        }
+
+        // Open connection
+        $.connection.hub.start().done(function () {
+            var userId = $('#userId').val();
+            if (userId != undefined && userId != null && userId != '') {
+                chat.server.send(userId);
+            }
+        });
+
+        function manualLogOff() {
+            var userId = $('#userId').val();
+            if (userId != undefined && userId != null && userId != '') {
+                if (window.location.pathname == '/Home/Admin') {
+                    document.getElementById('logoutForm').submit();
+                } else {
+                    chat.server.logOut(userId);
+                }
+            }
+        }
+    </script>
+}
+else
+{
+    <ul class="nav navbar-nav navbar-right">
+        <li>@Html.ActionLink("Register", "Register", "Account", routeValues: null, htmlAttributes: new { id = "registerLink" })</li>
+        <li>@Html.ActionLink("Log in", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink" })</li>
+    </ul>
+}

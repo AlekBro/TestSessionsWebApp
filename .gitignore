@@ -1,0 +1,9 @@
+﻿################################################################################
+# This .gitignore file was automatically created by Microsoft(R) Visual Studio.
+################################################################################
+
+/packages
+/TestSessionsWebApp/bin
+/TestSessionsWebApp/obj/Debug
+/.vs/TestSessionsWebApp
+/.vs/config/applicationhost.config
