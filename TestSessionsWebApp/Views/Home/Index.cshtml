@@ -6,3 +6,36 @@
     <h1>Home</h1>
     <p class="lead">This page is available for all users!</p>
 </div>
+
+<div class="row" style="text-align:justify;">
+    <div class="col-md-12">
+        <h3>Preventing a brute-force attacks:</h3>
+        <p>
+            The most obvious way to block brute-force attacks is to simply lock out accounts after a defined number of incorrect password attempts.
+            Account lockouts can last a specific duration, such as one hour, or the accounts could remain locked until manually unlocked by an administrator.
+            However, account lockout is not always the best solution, because someone could easily abuse the security measure and lock out hundreds of user accounts.
+            In fact, some Web sites experience so many attacks that they are unable to enforce a lockout policy because they would constantly be unlocking customer accounts.
+        </p>
+        <p>Other techniques you might want to consider are:</p>
+        <ul>
+            <li>For advanced users who want to protect their accounts from attack, give them the option to allow login only from certain IP addresses.</li>
+            <li>Assign unique login URLs to blocks of users so that not all users can access the site from the same URL.</li>
+            <li>Use a CAPTCHA to prevent automated attacks (see the sidebar "Using CAPTCHAs").</li>
+            <li>Instead of completely locking out an account, place it in a lockdown mode with limited capabilities.</li>
+        </ul>
+        <a href="https://www.owasp.org/index.php/Blocking_Brute_Force_Attacks" target="_blank">More information</a>
+
+        <h3>Preventing a DoS attacks:</h3>
+        <p>DoS stands for “denial of service” and refers to an attack that overwhelms a system with data—most commonly a flood of simultaneous requests sent to a website to view its pages, causing the web server to crash or simply become inoperable as it struggles to respond to more requests than it can handle.</p>
+        <p>There are several different types of DoS attacks and several ways to protect from them. For example, we can use IIS Server capabilities, like described in this articles:</p>
+        <ul>
+            <li>
+                <a href="https://blogs.msdn.microsoft.com/friis/2014/12/30/security-guidelines-to-detect-and-prevent-dos-attacks-targeting-iisazure-web-role-paas/" target="_blank">Security guidelines to detect and prevent DOS attacks targeting IIS/Azure Web Role (PAAS)</a>
+            </li>
+            <li>
+                <a href="https://www.iis.net/downloads/microsoft/dynamic-ip-restrictions" target="_blank">Dynamic IP Restrictions - Extension for IIS</a>
+            </li>
+        </ul>
+        <p>More information about general methods for preventing DoS attacks: <a href="https://msdn.microsoft.com/en-us/library/cc750213.aspx" target="_blank">Best Practices for Preventing DoS/Denial of Service Attacks</a></p>
+    </div>
+</div>
